@@ -276,18 +276,18 @@
 
 /* Hero section uses less horizontal padding to give max width to both columns */
 .heroSection {
-  padding: 26px 20px 36px !important;
+  padding: 60px 20px 36px !important;
 }
 
 @media (min-width: 768px) {
   .heroSection {
-    padding: 36px 40px 44px !important;
+    padding: 80px 40px 44px !important;
   }
 }
 
 @media (min-width: 1200px) {
   .heroSection {
-    padding: 36px 48px 44px !important;
+    padding: 100px 48px 44px !important;
   }
 }
 
@@ -677,6 +677,8 @@
   perspective: 1000px;
   width: 100%;
   overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
 .projectCard {
@@ -688,6 +690,7 @@
   flex-direction: column;
   position: relative;
   transition: border-color 0.2s ease;
+  flex-grow: 1;
 }
 
 .projectCard:hover {
@@ -719,6 +722,7 @@
   justify-content: space-between;
   align-items: flex-start;
   transform-style: preserve-3d;
+  gap: 16px;
 }
 
 .projectTitle {
@@ -1179,6 +1183,24 @@
 }
 
 /* ===== EDUCATION SECTION ===== */
+.educationList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.educationList:hover .educationCard {
+  opacity: 0.5;
+  transform: scale(0.99);
+}
+
+.educationList .educationCard:hover {
+  opacity: 1;
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
+}
+
 .educationCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border);
@@ -1187,6 +1209,7 @@
   flex-direction: column;
   gap: 28px;
   position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @media (min-width: 768px) {
@@ -1325,6 +1348,8 @@
   align-items: flex-start;
   position: relative;
   padding-bottom: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .leadershipItem:last-child {
@@ -1341,6 +1366,7 @@
   background-color: var(--bg-card);
   border: 2px solid var(--accent);
   flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .leadershipContent {
@@ -1356,6 +1382,8 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: left center;
 }
 
 .leadershipPeriod {
@@ -1364,4 +1392,135 @@
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for leadership timeline: sibling fade and scale up */
+.leadershipTimeline:hover .leadershipItem {
+  opacity: 0.4;
+}
+
+.leadershipTimeline .leadershipItem:hover {
+  opacity: 1;
+}
+
+.leadershipItem:hover .leadershipDot {
+  transform: scale(1.4);
+  background-color: var(--accent);
+}
+
+.leadershipItem:hover .leadershipRole {
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+/* npm Packages & Blogs Section Grid */
+.packagesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .packagesGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* Command Block for CLI Card */
+.commandBlock {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 6px;
+  transform: translateZ(15px);
+}
+
+.commandTextContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-space-grotesk), monospace;
+  font-size: 0.9rem;
+}
+
+.commandPrompt {
+  color: var(--accent);
+  font-weight: 600;
+  user-select: none;
+}
+
+.commandCode {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.commandCopyButton {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-space-grotesk), monospace;
+  font-size: 0.7rem;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.commandCopyButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--bg-hover);
+}
+
+.projectLinks {
+  display: flex;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 8px;
+  transform: translateZ(20px);
+}
+
+.projectTextLink {
+  font-family: var(--font-space-grotesk), monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.projectTextLink:hover {
+  color: var(--accent);
+}
+
+/* Static Projects Grid Layout: 2 on upper line, 1 centered on lower line */
+.projectsGridStatic {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .projectsGridStatic {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .projectsGridStatic > div:nth-child(3) {
+    grid-column: span 2;
+    max-width: calc(50% - 16px);
+    margin: 0 auto;
+    width: 100%;
+  }
 }

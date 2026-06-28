@@ -40,7 +40,7 @@ function ProjectCard({
 
   return (
     <div 
-      className={styles.projectCardWrapperMarquee}
+      className={styles.projectCardWrapper}
       ref={cardRef}
     >
       <div className={styles.projectCard} style={tiltStyle}>
@@ -88,22 +88,127 @@ function ProjectCard({
   );
 }
 
-const row1Projects = [
+function CliCard() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const tiltStyle = useTilt(cardRef, 8);
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('npx pulkitarora');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  return (
+    <div className={styles.projectCardWrapper} ref={cardRef}>
+      <div className={styles.projectCard} style={tiltStyle}>
+        <div className={styles.projectCardContent}>
+          <div className={styles.projectHeader}>
+            <h3 className={styles.projectTitle}>pulkitarora (CLI)</h3>
+            <div className={styles.socialRow}>
+              <a 
+                href="https://github.com/Pulkitarora12/pulkitarora-cli" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.projectIconLink}
+                aria-label="pulkitarora CLI GitHub"
+              >
+                <Github size={18} />
+              </a>
+              <a 
+                href="https://www.npmjs.com/package/pulkitarora" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.projectIconLink}
+                aria-label="pulkitarora CLI npm"
+              >
+                <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </div>
+
+          <div className={styles.projectMeta}>
+            {["Node.js", "Inquirer", "Chalk", "Boxen"].map((tag, idx) => (
+              <span key={idx} className={styles.techTag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <p className={styles.projectDescription}>
+            browse projects, download resume, or send an email — all from an interactive CLI menu
+          </p>
+
+          <div className={styles.commandBlock}>
+            <div className={styles.commandTextContainer}>
+              <span className={styles.commandPrompt}>$</span>
+              <span className={styles.commandCode}>npx pulkitarora</span>
+            </div>
+            <button 
+              onClick={copyToClipboard} 
+              className={styles.commandCopyButton}
+              title="Copy to clipboard"
+            >
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GrindLogCard() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const tiltStyle = useTilt(cardRef, 8);
+
+  return (
+    <div className={styles.projectCardWrapper} ref={cardRef}>
+      <div className={styles.projectCard} style={tiltStyle}>
+        <div className={styles.projectCardContent}>
+          <div className={styles.projectHeader}>
+            <h3 className={styles.projectTitle}>GrindLog — Personal Productivity & Learning Tracker</h3>
+            <div className={styles.socialRow}>
+              <a 
+                href="https://github.com/Pulkitarora12/GrindLog" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.projectIconLink}
+                aria-label="GrindLog GitHub Repository"
+              >
+                <Github size={18} />
+              </a>
+            </div>
+          </div>
+
+          <div className={styles.projectMeta}>
+            {["Next.js", "Prisma", "PostgreSQL", "React", "TypeScript"].map((tag, idx) => (
+              <span key={idx} className={styles.techTag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <p className={styles.projectDescription}>
+            A personal productivity tracker and editorial blog designed to record daily developer logs, track skill checklists, and visualize progress on an interactive activity calendar.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const staticProjects = [
   {
     title: "CodeWar — Real-Time Coding Battle Platform",
     githubUrl: "https://github.com/Pulkitarora12/CodeWar",
     tags: ["Spring Boot", "WebSocket", "Redis", "React", "MySQL"],
     description: "A competitive coding matchmaking platform hosting real-time, rating-balanced developer face-offs based on live Codeforces problem distributions."
   },
-  {
-    title: "GrindLog — Personal Productivity & Learning Tracker",
-    githubUrl: "https://github.com/Pulkitarora12/GrindLog",
-    tags: ["Next.js", "Prisma", "PostgreSQL", "React", "TypeScript"],
-    description: "A personal productivity tracker and editorial blog designed to record daily developer logs, track skill checklists, and visualize progress on an interactive activity calendar."
-  }
-];
-
-const row2Projects = [
   {
     title: "AuthTemplate — Secure Spring Boot Auth Boilerplate",
     githubUrl: "https://github.com/Pulkitarora12/AuthTemplate",
@@ -266,6 +371,7 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const packagesRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const educationRef = useRef<HTMLDivElement>(null);
@@ -279,6 +385,7 @@ export default function Home() {
   useScrollReveal(heroRef);
   useScrollReveal(aboutRef);
   useScrollReveal(projectsRef);
+  useScrollReveal(packagesRef);
   useScrollReveal(skillsRef);
   useScrollReveal(experienceRef);
   useScrollReveal(educationRef);
@@ -291,6 +398,7 @@ export default function Home() {
       { id: 'about', ref: aboutRef },
       { id: 'experience', ref: experienceRef },
       { id: 'projects', ref: projectsRef },
+      { id: 'packages', ref: packagesRef },
       { id: 'skills', ref: skillsRef },
       { id: 'education', ref: educationRef },
       { id: 'leadership', ref: leadershipRef },
@@ -391,6 +499,12 @@ export default function Home() {
               Projects
             </button>
             <button 
+              onClick={() => scrollToSection('packages', packagesRef)} 
+              className={`${styles.navLink} ${activeSection === 'packages' ? styles.navLinkActive : ''}`}
+            >
+              npm Packages & Blogs
+            </button>
+            <button 
               onClick={() => scrollToSection('skills', skillsRef)} 
               className={`${styles.navLink} ${activeSection === 'skills' ? styles.navLinkActive : ''}`}
             >
@@ -412,23 +526,7 @@ export default function Home() {
         </div>
 
         <div className={styles.sidebarFooter}>
-          <div className={styles.socialRow}>
-            <a href="https://github.com/Pulkitarora12" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="GitHub Profile">
-              <Github size={20} />
-            </a>
-            <a href="https://linkedin.com/in/pulkit-arora-92502321a" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="LinkedIn Profile">
-              <Linkedin size={20} />
-            </a>
-            <a href="https://leetcode.com/u/pulkitarora0714/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="LeetCode Profile">
-              <LeetCodeIcon size={20} />
-            </a>
-            <a href="mailto:pulkitarora0714@gmail.com" className={styles.socialIcon} aria-label="Send Email">
-              <Mail size={20} />
-            </a>
-            <a href="https://drive.google.com/file/d/1JfiQZNpRdWQkMmdui78LoARna6dBXbIE/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="View Resume / CV">
-              <FileText size={20} />
-            </a>
-          </div>
+
 
           <div className={styles.statusIndicator}>
             <span className={styles.statusDot}></span>
@@ -477,7 +575,7 @@ export default function Home() {
 
                 <div className={styles.dashboardContent}>
                   <div>
-                    <div className={styles.dashLine}>$ systemctl status pulkit-dev</div>
+                    <div className={styles.dashLine}>$ npx pulkitarora</div>
                     <div className={`${styles.dashLine} ${styles.dashLineHighlight}`}>● active (running) since August 2023</div>
                     <div className={styles.dashLine}>&gt; Core runtime: JDK 21 / Spring Boot 3</div>
                     <div className={styles.dashLine}>&gt; Uptime: 2+ years production systems</div>
@@ -556,8 +654,8 @@ export default function Home() {
         {/* EXPERIENCE TIMELINE SECTION */}
         <section ref={experienceRef} id="experience" className={styles.section}>
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Project Experience</span>
-            <h2 className={styles.sectionTitle}>Project Experience</h2>
+            <span className={styles.sectionTag}>Timeline</span>
+            <h2 className={styles.sectionTitle}>Work Experience</h2>
           </div>
 
           <div className={styles.timeline}>
@@ -599,36 +697,27 @@ export default function Home() {
         {/* PROJECTS SECTION */}
         <section ref={projectsRef} id="projects" className={styles.section}>
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Selected Deployments</span>
+            <span className={styles.sectionTag}>Selected Project Work</span>
             <h2 className={styles.sectionTitle}>Engineered Architectures</h2>
           </div>
 
-          <div className={styles.projectList}>
-            {/* First Row (Scrolls Left) */}
-            <ScrollMarquee direction="left" speed={0.8}>
-              {row1Projects.map((proj, idx) => (
-                <ProjectCard key={`r1-orig-${idx}`} {...proj} />
-              ))}
-              {row1Projects.map((proj, idx) => (
-                <ProjectCard key={`r1-dup1-${idx}`} {...proj} />
-              ))}
-              {row1Projects.map((proj, idx) => (
-                <ProjectCard key={`r1-dup2-${idx}`} {...proj} />
-              ))}
-            </ScrollMarquee>
+          <div className={styles.projectsGridStatic}>
+            {staticProjects.map((proj, idx) => (
+              <ProjectCard key={idx} {...proj} />
+            ))}
+          </div>
+        </section>
 
-            {/* Second Row (Scrolls Right) */}
-            <ScrollMarquee direction="right" speed={0.8}>
-              {row2Projects.map((proj, idx) => (
-                <ProjectCard key={`r2-orig-${idx}`} {...proj} />
-              ))}
-              {row2Projects.map((proj, idx) => (
-                <ProjectCard key={`r2-dup1-${idx}`} {...proj} />
-              ))}
-              {row2Projects.map((proj, idx) => (
-                <ProjectCard key={`r2-dup2-${idx}`} {...proj} />
-              ))}
-            </ScrollMarquee>
+        {/* NPM PACKAGES & BLOGS SECTION */}
+        <section ref={packagesRef} id="packages" className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionTag}>CLI Tools & Logs</span>
+            <h2 className={styles.sectionTitle}>npm Packages & Blogs</h2>
+          </div>
+
+          <div className={styles.packagesGrid}>
+            <CliCard />
+            <GrindLogCard />
           </div>
         </section>
 
@@ -908,7 +997,7 @@ export default function Home() {
             <span className={styles.sectionTag}>Academic Record</span>
             <h2 className={styles.sectionTitle}>Education</h2>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div className={styles.educationList}>
             <div className={styles.educationCard}>
               <div className={styles.educationLeft}>
                 <div className={styles.educationDegree}>B.Tech in Computer Science &amp; Engineering</div>
