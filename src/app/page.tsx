@@ -108,7 +108,7 @@ function CliCard() {
       <div className={styles.projectCard} style={tiltStyle}>
         <div className={styles.projectCardContent}>
           <div className={styles.projectHeader}>
-            <h3 className={styles.projectTitle}>pulkitarora (CLI)</h3>
+            <h3 className={styles.projectTitle}>npx whoami</h3>
             <div className={styles.socialRow}>
               <a 
                 href="https://github.com/Pulkitarora12/pulkitarora-cli" 
