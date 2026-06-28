@@ -202,6 +202,15 @@ function GrindLogCard() {
   );
 }
 
+function AboutStatCard({ val, lbl }: { val: string; lbl: string }) {
+  return (
+    <div className={styles.aboutStatCard}>
+      <span className={styles.aboutStatVal}>{val}</span>
+      <span className={styles.aboutStatLbl}>{lbl}</span>
+    </div>
+  );
+}
+
 const staticProjects = [
   {
     title: "CodeWar — Real-Time Coding Battle Platform",
@@ -380,6 +389,10 @@ export default function Home() {
   // Hook for 3D Hero Viewport (ref is placed on the tracking scene div, style on the rotated viewport)
   const heroSceneRef = useRef<HTMLDivElement>(null);
   const heroViewportStyle = useTilt(heroSceneRef, 12);
+
+  // Hook for About Stats grid (all 4 cards tilt as one unit)
+  const aboutStatsRef = useRef<HTMLDivElement>(null);
+  const aboutStatsTiltStyle = useTilt(aboutStatsRef, 10);
 
   // Apply scroll reveal animations to sections
   useScrollReveal(heroRef);
@@ -630,23 +643,11 @@ export default function Home() {
                 Currently open to <strong>SDE / Backend internships (PPO/Full-time) for 2027</strong>. If you&apos;re building something serious with Java, Spring Boot, or distributed data — I&apos;m interested.
               </p>
             </div>
-            <div className={styles.aboutStats}>
-              <div className={styles.aboutStatCard}>
-                <span className={styles.aboutStatVal}>2023</span>
-                <span className={styles.aboutStatLbl}>Started shipping production code</span>
-              </div>
-              <div className={styles.aboutStatCard}>
-                <span className={styles.aboutStatVal}>8.78</span>
-                <span className={styles.aboutStatLbl}>CGPA at BPIT</span>
-              </div>
-              <div className={styles.aboutStatCard}>
-                <span className={styles.aboutStatVal}>Freelance</span>
-                <span className={styles.aboutStatLbl}>Systems Shipped for Clients</span>
-              </div>
-              <div className={styles.aboutStatCard}>
-                <span className={styles.aboutStatVal}>Football</span>
-                <span className={styles.aboutStatLbl}>Active Player & Sports Enthusiast</span>
-              </div>
+            <div ref={aboutStatsRef} className={styles.aboutStats} style={aboutStatsTiltStyle}>
+              <AboutStatCard val="2023" lbl="Started shipping production code" />
+              <AboutStatCard val="8.78" lbl="CGPA at BPIT" />
+              <AboutStatCard val="Freelance" lbl="Systems Shipped for Clients" />
+              <AboutStatCard val="Football" lbl="Active Player & Sports Enthusiast" />
             </div>
           </div>
         </section>
