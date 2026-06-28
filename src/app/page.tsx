@@ -665,7 +665,7 @@ export default function Home() {
               <div className={styles.timelineHeader}>
                 <span className={styles.timelinePeriod}>Nov 2025 – Jan 2026</span>
                 <h3 className={styles.timelineTitle}>Full Stack Developer (Freelance)</h3>
-                <span className={styles.timelineCompany}>Faridabad, India</span>
+                <span className={styles.timelineCompany}>Remote</span>
               </div>
               <div className={styles.timelineBody}>
                 <ul>
