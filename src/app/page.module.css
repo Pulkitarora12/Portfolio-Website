@@ -7,13 +7,7 @@
 
 @media (min-width: 1024px) {
   .container {
-    grid-template-columns: 280px 1fr;
-  }
-}
-
-@media (min-width: 1440px) {
-  .container {
-    grid-template-columns: 320px 1fr;
+    display: block;
   }
 }
 
@@ -31,9 +25,11 @@
 
 @media (min-width: 1024px) {
   .sidebar {
-    height: 100vh;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
     padding: 36px 24px 44px;
     border-bottom: none;
     border-right: 1px solid var(--border);
@@ -44,6 +40,12 @@
 
   .sidebar::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    width: 320px;
   }
 }
 
@@ -150,27 +152,25 @@
   color: var(--text);
 }
 
-.navLinkActive::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background-color: var(--accent);
-}
-
 .navLink::before {
   content: '';
   display: inline-block;
   width: 6px;
   height: 6px;
-  background-color: transparent;
-  border: 1px solid var(--border);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  background-color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
 }
 
 .navLink:hover::before {
+  opacity: 1;
   background-color: var(--accent);
-  border-color: var(--accent);
+}
+
+.navLinkActive::before {
+  opacity: 1;
+  background-color: var(--accent);
 }
 
 .sidebarFooter {
@@ -255,6 +255,18 @@
 .content {
   background-color: var(--bg);
   overflow-x: hidden;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    margin-left: 280px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .content {
+    margin-left: 320px;
+  }
 }
 
 .section {
