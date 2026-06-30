@@ -182,6 +182,15 @@ function GrindLogCard() {
               >
                 <Github size={18} />
               </a>
+              <a 
+                href="http://grind-log-one.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.projectIconLink}
+                aria-label="GrindLog Live Site"
+              >
+                <ArrowUpRight size={18} />
+              </a>
             </div>
           </div>
 
@@ -299,7 +308,7 @@ function ScrollMarquee({ children, direction, speed = 1.0 }: ScrollMarqueeProps)
       const singleWidth = getSingleSetWidth();
       if (singleWidth <= 0) return;
 
-      let currentScroll = container.scrollLeft;
+      const currentScroll = container.scrollLeft;
       if (currentScroll >= singleWidth * 1.8) {
         container.scrollLeft = currentScroll - singleWidth;
         scrollPosRef.current = container.scrollLeft;
