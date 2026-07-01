@@ -1073,7 +1073,7 @@ export default function Home() {
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipOrg}>
               <div className={styles.leadershipOrgName}>Drishti — Rotaract Club of BPIT</div>
-              <div className={styles.leadershipOrgMeta}>Part-time · 2 yrs 9 mos</div>
+              <div className={styles.leadershipOrgMeta}>2 yrs 9 mos</div>
             </div>
             <div className={styles.leadershipTimeline}>
               <div className={styles.leadershipItem}>
