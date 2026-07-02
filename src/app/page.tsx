@@ -489,7 +489,7 @@ export default function Home() {
               <a href="mailto:pulkitarora0714@gmail.com" className={styles.socialIcon} aria-label="Send Email">
                 <Mail size={20} />
               </a>
-              <a href="https://drive.google.com/file/d/1NjP_-VWG5rHUyX_sMVlZ34XCSubOn0_T/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="View Resume / CV">
+              <a href="https://drive.google.com/file/d/12fEi-86Qx_tKJP8LDOAFQavjR_zg88oZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="View Resume / CV">
                 <FileText size={20} />
               </a>
             </div>
